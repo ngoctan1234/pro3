@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <div th:replace="admin/fragments/header :: header"></div>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+  <div class="content-wrapper p-5" >
+
+  <table class="table">
+    <thead>
+      <tr>
+		<th>id</th>
+        <th >Name</th>
+        <th >Price</th>
+		<th >Image</th>
+		<th >Category</th>
+		<th >Description</th>
+		<th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="product: ${list}">
+		<td th:text="${product.id}"></td>
+        <td th:text="${product.productName}"></td>
+		<td th:text="${product.price}"></td>
+		
+		<td><img th:src="@{'/uploads/'+${product.image}}" width="70px" /></td>
+		<td th:text="${product.category.categoryName}"></td>
+		<td th:text="${product.description}"></td>
+	  <td><a th:href="@{/admin/edit-product/{id}(id=${product.id})}">Edit</a>
+		<a th:href="@{/admin/delete-product/{id}(id=${product.id})}" onclick="return confirm('Ban muon xoa khong?')">Delete</a>
+	</td>
+
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div th:replace="admin/fragments/footer :: footer"></div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+ <div th:replace="admin/fragments/js :: js"></div>
+</body>
+</html>

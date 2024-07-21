@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <div th:replace="admin/fragments/header :: header"></div>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+  <div class="content-wrapper p-5" >
+
+	<form action="" method="post" th:action="@{/admin/edit-category}" th:object="${category}">
+		   <input type="hidden" th:field="*{id}"><br>
+	       <input type="text" placeholder="Category name" th:field="*{categoryName}"><br>
+	       <input type="radio" name="status" th:field="*{categoryStatus}" value="1"><label for="">Yes</label><br>
+	       <input type="radio"  name="status" th:field="*{categoryStatus}" value="0" /> <label for="">No</label><br>
+	       <input type="submit" >
+	   </form>
+  
+  
+  </div>
+  <div th:replace="admin/fragments/footer :: footer"></div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+ <div th:replace="admin/fragments/js :: js"></div>
+</body>
+</html>

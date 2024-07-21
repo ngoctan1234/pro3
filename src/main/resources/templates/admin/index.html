@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <div th:replace="admin/fragments/header :: header"></div>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div th:replace="admin/fragments/contain :: contain"></div>
+  <!-- /.content-wrapper -->
+  
+  <div th:replace="admin/fragments/footer :: footer"></div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+ <div th:replace="admin/fragments/js :: js"></div>
+</body>
+</html>

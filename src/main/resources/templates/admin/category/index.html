@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <div th:replace="admin/fragments/header :: header"></div>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+  <div class="content-wrapper p-5" >
+    <form method="get" >
+		<input type="text" name="keyWord" placeholder="search" th:value="${keyWord}"/>
+	</form>
+  <table class="table">
+    <thead>
+      <tr>
+		<th>id</th>
+        <th >Name</th>
+        <th >Status</th>
+		<th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cate: ${list}">
+		<td th:text="${cate.id}"></td>
+        <td th:text="${cate.categoryName}"></td>
+        <td th:if="${cate.categoryStatus}">Yes</td>
+  	  <td th:if="${!cate.categoryStatus}">No</td>
+	  <td><a th:href="@{/admin/edit-category/{id}(id=${cate.id})}">Edit</a>
+		<a th:href="@{/admin/delete-category/{id}(id=${cate.id})}" onclick="return confirm('Ban muon xoa khong?')">Delete</a>
+	</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <ul class="pagination justify-content-end">
+     <li class="page-item" th:if="${currentPage>1}")>
+		<a class="page-link" th:href="@{'?pageNo='+${currentPage-1}}">Previous</a></li>
+     <li class="page-item" 
+	 		th:each="i:${#numbers.sequence(1,totalPage)}" 
+	 		
+		    th:classappend="${currentPage==i ? 'active':''}">
+		<a class="page-link" th:href="@{${keyWord!=null&&keyWord!=''?'?keyWord='+keyWord+'&':'?'}+'pageNo='+${i}}" th:text="${i}"></a>
+	</li>
+
+	   </li>
+     <li class="page-item" th:if="${currentPage<totalPage}">
+		<a class="page-link" th:href="@{'?pageNo='+${currentPage+1}}">Next</a></li>
+   </ul>
+  </div>
+  <div th:replace="admin/fragments/footer :: footer"></div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+ <div th:replace="admin/fragments/js :: js"></div>
+</body>
+</html>

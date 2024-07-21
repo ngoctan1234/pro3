@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="admin/fragments/head :: head"></head>
+	<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css">
+			<style>
+				.main-container {
+					width: 50%;
+					
+				}
+			</style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <div th:replace="admin/fragments/header :: header"></div>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+  <div class="content-wrapper p-5" >
+
+	<form action="" method="post" th:action="@{/admin/edit-product}" th:object="${product}" enctype="multipart/form-data" >
+		<input type="hidden" th:field="*{id}"><br>
+	       <input type="text" placeholder="product name" th:field="*{productName}"><br>
+	       <input type="text" placeholder="price" th:field="*{price}"><br>
+           <input type="file"  name="file1"><br>
+		   
+		   <textarea th:field="*{description}" ></textarea><br>
+		   <select   th:field="*{category.id}" >
+		       <option 
+			   th:each="category : ${listCate}"
+		         th:value="${category.id}" 
+		        th:text="${category.categoryName}">
+			</option>
+		     </select>
+			 
+	       <input type="submit" >
+	   </form>
+  
+  
+  </div>
+  <div th:replace="admin/fragments/footer :: footer"></div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+ <div th:replace="admin/fragments/js :: js"></div>
+ <script type="importmap">
+ 			{
+ 				"imports": {
+ 					"ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
+ 					"ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
+ 				}
+ 			}
+ 		</script>
+ 		<script type="module">
+ 			import {
+ 				ClassicEditor,
+ 				Essentials,
+ 				Paragraph,
+ 				Bold,
+ 				Italic,
+ 				Font
+ 			} from 'ckeditor5';
+ 			ClassicEditor
+ 				.create( document.querySelector( '#editor' ), {
+ 					plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
+ 					toolbar: [
+ 						'undo', 'redo', '|', 'bold', 'italic', '|',
+ 						'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+ 					]
+ 				} )
+ 				.then( editor => {
+ 					window.editor = editor;
+ 				} )
+ 				.catch( error => {
+ 					console.error( error );
+ 				} );
+ 		</script>
+ 		<!-- A friendly reminder to run on a server, remove this during the integration. -->
+ 		<script>
+ 			window.onload = function() {
+ 				if ( window.location.protocol === 'file:' ) {
+ 					alert( 'This sample requires an HTTP server. Please serve this file with a web server.' );
+ 				}
+ 			};
+			CKEDITOR.replace('description');
+ 		</script>
+</body>
+</html>
